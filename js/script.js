@@ -37,11 +37,28 @@ fetchButton.addEventListener('click', () => {
   const startDate = startInput.value;
   const endDate = endInput.value;
 
+  // Get today's date in YYYY-MM-DD format
+  const today = new Date().toISOString().split('T')[0];
+
+  // Validate that both dates are selected
   if (!startDate || !endDate) {
     alert('Please select both a start and end date.');
     return;
   }
 
+  // Validate that the start date is not after the end date
+  if (startDate > endDate) {
+    alert('The start date cannot be after the end date.');
+    return;
+  }
+
+  // Validate that neither date is in the future
+  if (startDate > today || endDate > today) {
+    alert('Dates cannot be in the future.');
+    return;
+  }
+
+  // If all validations pass, show the loading message and fetch photos
   showLoadingMessage();
   fetchNasaPhotos(startDate, endDate);
 });
