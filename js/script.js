@@ -63,15 +63,22 @@ function displayPhotos(data) {
 
   // Loop through the data and create a gallery item for each photo
   data.forEach(photo => {
+    // Format the date to "Month Day, Year"
+    const formattedDate = new Date(photo.date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+
     // Create a new div for the gallery item
     const itemDiv = document.createElement('div');
     itemDiv.className = 'gallery-item';
 
-    // Add the photo, title, and date to the div
+    // Add the photo, title, and formatted date to the div
     itemDiv.innerHTML = `
       <img src="${photo.url}" alt="${photo.title}" />
       <h3>${photo.title}</h3>
-      <p>${photo.date}</p>
+      <p>${formattedDate}</p>
     `;
 
     // Add the gallery item to the gallery
