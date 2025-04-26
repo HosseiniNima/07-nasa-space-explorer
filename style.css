@@ -144,9 +144,12 @@ button:hover {
   text-align: center;
   padding: 40px;
   color: #666;
+  font-size: 18px; /* Increase font size */
+  font-weight: bold; /* Make the text bold */
 }
 
 .placeholder-icon {
-  font-size: 48px;
+  font-size: 64px; /* Increase icon size */
   margin-bottom: 20px;
+  color: #888; /* Slightly darker color for the icon */
 }

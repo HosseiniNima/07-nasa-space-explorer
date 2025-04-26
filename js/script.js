@@ -18,6 +18,9 @@ fetchButton.addEventListener('click', () => {
     return;
   }
 
+  // Show the loading message
+  showLoadingMessage();
+
   // Fetch data from NASA's API
   fetchNasaPhotos(startDate, endDate);
 });
@@ -84,6 +87,12 @@ function displayPhotos(data) {
     // Add the gallery item to the gallery
     gallery.appendChild(itemDiv);
   });
+}
+
+// Function to display a loading message
+function showLoadingMessage() {
+  const gallery = document.getElementById('gallery');
+  gallery.innerHTML = '<p>🔄 Loading space photos…</p>';
 }
 
 // Function to display an error message in the gallery
