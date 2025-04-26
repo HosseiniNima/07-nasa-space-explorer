@@ -6,6 +6,32 @@ const fetchButton = document.querySelector('button');
 // NASA API key
 const apiKey = 'u2kfAy6xpVQmTnhuWgOZwWYPKAvUhV7rp84unLwf';
 
+// Array of facts
+const facts = [
+  "The Sun accounts for 99.86% of the mass in the Solar System.",
+  "A day on Venus is longer than a year on Venus.",
+  "There are more stars in the universe than grains of sand on Earth.",
+  "Jupiter has 79 moons, the most of any planet in our Solar System.",
+  "The Milky Way galaxy is about 100,000 light-years across.",
+  "Neutron stars are so dense that a sugar-cube-sized amount of their material would weigh a billion tons.",
+  "Saturn's moon Titan has a thick atmosphere and is the only moon known to have clouds."
+];
+
+// Function to display a random fact
+function displayRandomFact() {
+  // Pick a random fact from the array
+  const randomFact = facts[Math.floor(Math.random() * facts.length)];
+
+  // Get the fact container element
+  const factContainer = document.getElementById('fact-container');
+
+  // Set the random fact as the content
+  factContainer.textContent = randomFact;
+}
+
+// Call the function to display a random fact on page load
+displayRandomFact();
+
 // Add an event listener to the button to fetch data when clicked
 fetchButton.addEventListener('click', () => {
   const startDate = startInput.value;
