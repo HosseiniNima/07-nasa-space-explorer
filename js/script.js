@@ -100,6 +100,13 @@ function openModal(photo) {
   closeModal.addEventListener('click', () => {
     modal.style.display = 'none';
   });
+
+  // Close the modal when clicking outside the modal content
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
 }
 
 // Function to display a loading message

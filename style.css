@@ -165,6 +165,7 @@ button:hover {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
+  cursor: pointer; /* Indicate that the background is clickable */
 }
 
 .modal-content {
@@ -176,6 +177,7 @@ button:hover {
   max-width: 600px;
   text-align: center;
   color: #333;
+  cursor: default; /* Prevent pointer cursor on modal content */
 }
 
 .modal-image {
