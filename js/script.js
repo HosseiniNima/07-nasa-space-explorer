@@ -8,43 +8,33 @@ const apiKey = 'u2kfAy6xpVQmTnhuWgOZwWYPKAvUhV7rp84unLwf';
 
 // Add an event listener to the button to fetch data when clicked
 fetchButton.addEventListener('click', () => {
-  // Get the selected start and end dates
   const startDate = startInput.value;
   const endDate = endInput.value;
 
-  // Check if both dates are selected
   if (!startDate || !endDate) {
     alert('Please select both a start and end date.');
     return;
   }
 
-  // Show the loading message
   showLoadingMessage();
-
-  // Fetch data from NASA's API
   fetchNasaPhotos(startDate, endDate);
 });
 
 // Function to fetch photos from NASA's API
 function fetchNasaPhotos(startDate, endDate) {
-  // Build the API URL with the selected dates and API key
   const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate}&end_date=${endDate}`;
 
-  // Use fetch to get data from the API
   fetch(apiUrl)
     .then(response => {
-      // Check if the response is OK
       if (!response.ok) {
         throw new Error('Failed to fetch data from NASA API');
       }
-      return response.json(); // Convert the response to JSON
+      return response.json();
     })
     .then(data => {
-      // Display the fetched data in the gallery
       displayPhotos(data);
     })
     .catch(error => {
-      // Log any errors and show an error message
       console.error('Error fetching data:', error);
       displayErrorMessage('Failed to load images. Please try again.');
     });
@@ -52,40 +42,63 @@ function fetchNasaPhotos(startDate, endDate) {
 
 // Function to display photos in the gallery
 function displayPhotos(data) {
-  // Get the gallery element
   const gallery = document.getElementById('gallery');
-
-  // Clear any existing content in the gallery
   gallery.innerHTML = '';
 
-  // Check if there are any photos in the data
   if (!data || data.length === 0) {
     gallery.innerHTML = '<p>No images found for the selected date range.</p>';
     return;
   }
 
-  // Loop through the data and create a gallery item for each photo
   data.forEach(photo => {
-    // Format the date to "Month Day, Year"
     const formattedDate = new Date(photo.date).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     });
 
-    // Create a new div for the gallery item
     const itemDiv = document.createElement('div');
     itemDiv.className = 'gallery-item';
-
-    // Add the photo, title, and formatted date to the div
     itemDiv.innerHTML = `
       <img src="${photo.url}" alt="${photo.title}" />
       <h3>${photo.title}</h3>
       <p>${formattedDate}</p>
     `;
 
-    // Add the gallery item to the gallery
+    // Add click event to open the modal
+    itemDiv.addEventListener('click', () => {
+      openModal(photo);
+    });
+
     gallery.appendChild(itemDiv);
+  });
+}
+
+// Function to open the modal
+function openModal(photo) {
+  const modal = document.getElementById('modal');
+  const modalContent = document.getElementById('modal-content');
+
+  const formattedDate = new Date(photo.date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  modalContent.innerHTML = `
+    <span id="close-modal">&times;</span>
+    <img src="${photo.url}" alt="${photo.title}" class="modal-image" />
+    <h2>${photo.title}</h2>
+    <p><strong>Date:</strong> ${formattedDate}</p>
+    <p>${photo.explanation}</p>
+  `;
+
+  modal.style.display = 'block';
+
+  // Close the modal when the close button is clicked
+  const closeModal = document.getElementById('close-modal');
+  closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
   });
 }
 
