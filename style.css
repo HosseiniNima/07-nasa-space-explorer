@@ -7,7 +7,7 @@
 
 /* Base page styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   background-color: #f1f1f1;
   padding: 20px;
 }
@@ -108,6 +108,20 @@ button:hover {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  font-family: 'Source Sans Pro', Arial, sans-serif; /* Apply font here */
+}
+
+.gallery-item h3 {
+  font-weight: 600; /* Bold for titles */
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.gallery-item p {
+  margin-top: 10px;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 400; /* Regular weight for descriptions */
 }
 
 /* Three columns on wider screens */
@@ -122,12 +136,6 @@ button:hover {
   height: 200px;
   object-fit: cover;
   border-radius: 4px;
-}
-
-.gallery-item p {
-  margin-top: 10px;
-  padding: 5px;
-  font-size: 14px;
 }
 
 /* Placeholder content */
